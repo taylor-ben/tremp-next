@@ -1,4 +1,5 @@
 import { Feed } from '../features/Feed'
+import { Filters } from '../features/Filters'
 import { PostsResponse } from '../features/post.interfaces'
 
 async function getPosts(): Promise<PostsResponse> {
@@ -14,7 +15,7 @@ export default async function Home() {
     <div>
       <main>
         <div>hello2</div>
-        {/* <Filters /> */}
+        <Filters />
         <Feed posts={postList.posts} />
       </main>
       <footer>hello</footer>
