@@ -1,15 +1,23 @@
-import { Post } from './post.interfaces'
+import { Post, PostsResponse } from './post.interfaces'
 
 interface Props {
-  posts: Post[]
+  posts?: Post[]
 }
 
-export const Feed = ({ posts }: Props) => {
+async function getPosts(): Promise<PostsResponse> {
+  const res = await fetch('http://localhost:3000/api/posts/', {
+    method: 'POST',
+  })
+  return res.json()
+}
+
+export async function Feed({ posts = [] }: Props) {
+  const postList = await getPosts()
   return (
     <div>
       Feed
       <div>
-        {posts?.map((post) => (
+        {postList.posts?.map((post) => (
           <pre key={post.postId}>{JSON.stringify(post, null, 2)}</pre>
         ))}
       </div>
