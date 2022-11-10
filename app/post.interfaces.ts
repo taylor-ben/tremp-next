@@ -18,6 +18,8 @@ export interface Post {
 
 export type City = [string, string]
 
+export type IsDriver = 'true' | 'false'
+
 export interface SearchParams extends Record<string, string | boolean> {
-  driver: boolean
+  driver: IsDriver
 }

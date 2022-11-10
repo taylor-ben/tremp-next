@@ -3,35 +3,25 @@
 import {
   Autocomplete,
   Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
   TextField,
   ToggleButton,
   ToggleButtonGroup,
 } from '@mui/material'
-import Link from 'next/link'
-import { FC, useEffect, useState } from 'react'
-import { City } from './post.interfaces'
+import { useQueryParam } from 'use-query-params'
+import { IsDriver } from './post.interfaces'
 import { ThemeWrap } from './ThemeWrap'
 
-interface Props {
-  // cities: City[]
-}
-
-export const Filters: FC<Props> = () => {
-  const [driver, setDriver] = useState<boolean>()
-  const handleChange = () => {}
+export const Filters = () => {
   const driverChange = (
     event: React.MouseEvent<HTMLElement>,
-    driverValue: boolean
+    driverValue: IsDriver
   ) => {
     setDriver(driverValue)
   }
 
-  // const cityOptions = cities.map(([cityHe, cityEn]) => ({ label: cityHe }))
   const cityOptions = [{ label: 'yes' }]
+
+  const [driver, setDriver] = useQueryParam('driver')
 
   return (
     <ThemeWrap>
@@ -59,17 +49,11 @@ export const Filters: FC<Props> = () => {
           onChange={driverChange}
           aria-label='Driver'
         >
-          <ToggleButton value={true}>נהגים</ToggleButton>
-          <ToggleButton value={false}>טרמפיסטים</ToggleButton>
+          <ToggleButton value={'true'}>נהגים</ToggleButton>
+          <ToggleButton value={'false'}>טרמפיסטים</ToggleButton>
         </ToggleButtonGroup>
 
-        <Link
-          href={{
-            query: { driver: driver },
-          }}
-        >
-          <Button variant='contained'>חפש</Button>
-        </Link>
+        <Button variant='contained'>חפש</Button>
       </div>
     </ThemeWrap>
   )

@@ -13,7 +13,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { useState } from 'react'
 
 function Adapter(props: any) {
-  return <NextAdapter {...props} shallow={false} />
+  return <NextAdapter {...props} shallow={true} />
 }
 
 const MyApp: AppType = ({ Component, pageProps }) => {
