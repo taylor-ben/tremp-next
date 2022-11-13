@@ -1,16 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useQueryParam } from 'use-query-params'
 import { fetchPosts } from '../app/api'
-import {
-  CityNameTranslate,
-  IsDriver,
-  Post,
-  PostsResponse,
-  QueryParser,
-  SearchParams,
-} from './post.interfaces'
-import { parseQuery } from './supported-cities.helpers'
+import { CityNameTranslate } from './post.interfaces'
 import { useCityParams } from './useSearchParams'
 
 interface Props {
@@ -19,13 +9,10 @@ interface Props {
 
 export function Feed({ mapToHebrew }: Props) {
   const cityParams = useCityParams(mapToHebrew)
-  console.log('cityParams:', cityParams)
-  const [driver] = useQueryParam<IsDriver>('driver')
-  const searchParams: SearchParams = { driver }
 
   const { data, isLoading } = useQuery(
-    ['posts', searchParams],
-    () => fetchPosts(searchParams),
+    ['posts', cityParams],
+    () => fetchPosts(cityParams),
     {
       staleTime: 60_000,
     }
