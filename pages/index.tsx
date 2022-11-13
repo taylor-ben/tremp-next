@@ -1,10 +1,20 @@
 import { type NextPage } from 'next'
 import Head from 'next/head'
-import { FiltersContainer } from '../app/FiltersContainer'
-import { Feed } from '../app/Feed'
-import { fetchPosts } from '../app/api'
-import { PostsResponse, SearchParams } from '../app/post.interfaces'
+import { Filters } from '../features/Filters'
+import { Feed } from '../features/Feed'
+import { fetchPosts, getSupportedCities } from '../app/api'
+import {
+  CityNameTranslate,
+  PostsResponse,
+  QueryParser,
+  SearchParams,
+} from '../features/post.interfaces'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
+import { keys } from '../features/helpers'
+import {
+  createCityMappers,
+  parseQuery,
+} from '../features/supported-cities.helpers'
 
 export const getServerSideProps = async ({
   query,
@@ -13,17 +23,29 @@ export const getServerSideProps = async ({
 }) => {
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery(['posts', query], () => fetchPosts(query))
+  const supportedCities = await queryClient.fetchQuery(
+    ['supportedCities'],
+    getSupportedCities
+  )
+
+  const { mapToHebrew } = createCityMappers(supportedCities)
+
+  const heQuery = parseQuery(query, mapToHebrew)
+
+  await queryClient.prefetchQuery(['posts', query], () => fetchPosts(heQuery))
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
       searchParams: query,
+      mapToHebrew,
     },
   }
 }
 
-const Home: NextPage = () => {
+const Home: NextPage<{ mapToHebrew: CityNameTranslate }> = ({
+  mapToHebrew,
+}) => {
   return (
     <>
       <Head>
@@ -34,8 +56,8 @@ const Home: NextPage = () => {
 
       <main dir='rtl'>
         <div>hello2</div>
-        <FiltersContainer />
-        <Feed />
+        <Filters />
+        <Feed mapToHebrew={mapToHebrew} />
       </main>
       <footer>hello</footer>
     </>

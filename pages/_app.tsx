@@ -1,6 +1,6 @@
 import { type AppType } from 'next/app'
 import '../styles/global.css'
-import { ThemeWrap } from '../app/ThemeWrap'
+import { ThemeWrap } from '../features/ThemeWrap'
 import { NextAdapter } from 'next-query-params'
 import { QueryParamProvider } from 'use-query-params'
 import {

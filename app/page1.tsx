@@ -1,8 +1,8 @@
 'use client'
 
-import { Feed } from './Feed'
-import { FiltersContainer } from './FiltersContainer'
-import { SearchParams } from './post.interfaces'
+import { Feed } from '../features/Feed'
+import { FiltersContainer } from './components'
+import { SearchParams } from '../features/post.interfaces'
 
 import { NextAdapter } from 'next-query-params'
 import { QueryParamProvider } from 'use-query-params'
