@@ -7,7 +7,6 @@ async function fetchInterceptor<T>(
 ): Promise<T> {
   const baseUrl = 'http://localhost:3000/api/'
   const params = new URLSearchParams(searchParams)
-  console.log('params:', params)
   const res = await fetch(`${baseUrl}${input}?${params}`, init)
   return res.json()
 }

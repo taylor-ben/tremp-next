@@ -56,7 +56,7 @@ const Home: NextPage<{ mapToHebrew: CityNameTranslate }> = ({
 
       <main dir='rtl'>
         <div>hello2</div>
-        <Filters />
+        <Filters mapToHebrew={mapToHebrew} />
         <Feed mapToHebrew={mapToHebrew} />
       </main>
       <footer>hello</footer>

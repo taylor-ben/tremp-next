@@ -8,11 +8,11 @@ interface Props {
 }
 
 export function Feed({ mapToHebrew }: Props) {
-  const cityParams = useCityParams(mapToHebrew)
+  const { params } = useCityParams(mapToHebrew)
 
   const { data, isLoading } = useQuery(
-    ['posts', cityParams],
-    () => fetchPosts(cityParams),
+    ['posts', params],
+    () => fetchPosts(params),
     {
       staleTime: 60_000,
     }

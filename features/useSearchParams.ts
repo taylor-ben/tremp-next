@@ -1,11 +1,12 @@
-import { useSearchParams } from 'next/navigation'
+import { useQueryParam } from 'use-query-params'
 import { CityNameTranslate, IsDriver } from './post.interfaces'
 import { parseQuery } from './supported-cities.helpers'
 
 export const useCityParams = (mapToHebrew: CityNameTranslate) => {
-  const params = useSearchParams()
-  const driver = params.get('driver') as IsDriver
-  const from = params.get('from') as string
-  const to = params.get('to') as string
-  return parseQuery({ driver, from, to }, mapToHebrew)
+  const [driver, setDriverParam] = useQueryParam<IsDriver>('driver')
+  const [from, setFromParam] = useQueryParam<string>('from')
+  const [to, setToParam] = useQueryParam<string>('to')
+  const params = parseQuery({ driver, from, to }, mapToHebrew)
+
+  return { params, setDriverParam: setDriverParam, setFromParam, setToParam }
 }
