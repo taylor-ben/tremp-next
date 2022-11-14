@@ -28,9 +28,9 @@ export const getServerSideProps = async ({
     getSupportedCities
   )
 
-  const { mapToHebrew } = createCityMappers(supportedCities)
+  const { toHebrew } = createCityMappers(supportedCities)
 
-  const heQuery = parseQuery(query, mapToHebrew)
+  const heQuery = parseQuery(query, toHebrew)
 
   await queryClient.prefetchQuery(['posts', query], () => fetchPosts(heQuery))
 
@@ -38,14 +38,12 @@ export const getServerSideProps = async ({
     props: {
       dehydratedState: dehydrate(queryClient),
       searchParams: query,
-      mapToHebrew,
+      toHebrew,
     },
   }
 }
 
-const Home: NextPage<{ mapToHebrew: CityNameTranslate }> = ({
-  mapToHebrew,
-}) => {
+const Home: NextPage<{ toHebrew: CityNameTranslate }> = ({ toHebrew }) => {
   return (
     <>
       <Head>
@@ -56,8 +54,8 @@ const Home: NextPage<{ mapToHebrew: CityNameTranslate }> = ({
 
       <main dir='rtl'>
         <div>hello2</div>
-        <Filters mapToHebrew={mapToHebrew} />
-        <Feed mapToHebrew={mapToHebrew} />
+        <Filters toHebrew={toHebrew} />
+        <Feed toHebrew={toHebrew} />
       </main>
       <footer>hello</footer>
     </>

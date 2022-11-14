@@ -4,11 +4,11 @@ import { CityNameTranslate } from './post.interfaces'
 import { useCityParams } from './useSearchParams'
 
 interface Props {
-  mapToHebrew: CityNameTranslate
+  toHebrew: CityNameTranslate
 }
 
-export function Feed({ mapToHebrew }: Props) {
-  const { params } = useCityParams(mapToHebrew)
+export function Feed({ toHebrew }: Props) {
+  const { params } = useCityParams(toHebrew)
 
   const { data, isLoading } = useQuery(
     ['posts', params],

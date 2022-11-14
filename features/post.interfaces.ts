@@ -28,7 +28,7 @@ export interface SearchParams {
 
 export interface CityMappers {
   mapToEnglish: CityNameTranslate
-  mapToHebrew: CityNameTranslate
+  toHebrew: CityNameTranslate
 }
 
 export type QueryParser = (query: SearchParams) => {

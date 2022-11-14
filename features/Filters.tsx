@@ -3,6 +3,7 @@
 import {
   Autocomplete,
   Button,
+  IconButton,
   TextField,
   ToggleButton,
   ToggleButtonGroup,
@@ -12,28 +13,23 @@ import { useQueryParam } from 'use-query-params'
 import { CityNameTranslate, IsDriver } from './post.interfaces'
 import { ThemeWrap } from './ThemeWrap'
 import { useCityParams } from './useSearchParams'
-
-interface Option {
-  label: string
-  value: string
-}
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz'
 
 interface Props {
-  mapToHebrew: CityNameTranslate
+  toHebrew: CityNameTranslate
 }
 
-export const Filters = ({ mapToHebrew }: Props) => {
-  const cityOptions: Option[] = useMemo(
-    () =>
-      Object.entries(mapToHebrew).map(([english, hebrew]) => ({
-        label: hebrew,
-        value: english,
-      })),
-    [mapToHebrew]
-  )
+export const Filters = ({ toHebrew }: Props) => {
+  const cityOptions: string[] = Object.values(toHebrew)
 
   const { params, setDriverParam, setToParam, setFromParam } =
-    useCityParams(mapToHebrew)
+    useCityParams(toHebrew)
+
+  const swap = () => {
+    const { cityFrom, cityTo } = params
+    setToParam(cityFrom)
+    setFromParam(cityTo)
+  }
 
   return (
     <ThemeWrap>
@@ -43,17 +39,20 @@ export const Filters = ({ mapToHebrew }: Props) => {
           autoHighlight
           options={cityOptions}
           sx={{ width: 300 }}
-          onChange={(_, option) => setFromParam(option?.value as string)}
+          onChange={(_, option) => setFromParam(option as string)}
           renderInput={(params) => (
             <TextField {...params} variant='filled' label='מאיפה' />
           )}
         />
+        <IconButton aria-label='delete' color='primary' onClick={swap}>
+          <SwapHorizIcon />
+        </IconButton>
         <Autocomplete
           disablePortal
           autoHighlight
           options={cityOptions}
           sx={{ width: 300 }}
-          onChange={(_, option) => setToParam(option?.value as string)}
+          onChange={(_, option) => setToParam(option as string)}
           renderInput={(params) => (
             <TextField {...params} variant='filled' label='לאן' />
           )}

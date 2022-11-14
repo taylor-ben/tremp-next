@@ -11,18 +11,18 @@ export function createCityMappers(supportedCities: City[]): CityMappers {
   const mapToEnglish: CityNameTranslate = {}
   supportedCities.forEach(([he, en]) => (mapToEnglish[he] = en))
 
-  const mapToHebrew: CityNameTranslate = {}
-  supportedCities.forEach(([he, en]) => (mapToHebrew[en] = he))
+  const toHebrew: CityNameTranslate = {}
+  supportedCities.forEach(([he, en]) => (toHebrew[en] = he))
 
   return {
     mapToEnglish,
-    mapToHebrew,
+    toHebrew,
   }
 }
 
 export const parseQuery = (
   query: SearchParams,
-  mapToHebrew: CityNameTranslate
+  toHebrew: CityNameTranslate
 ) => {
   const hebrewQuery: {
     driver?: IsDriver
@@ -34,10 +34,10 @@ export const parseQuery = (
     hebrewQuery.driver = query.driver
   }
   if (query.from) {
-    hebrewQuery.cityFrom = mapToHebrew[query.from]
+    hebrewQuery.cityFrom = toHebrew[query.from]
   }
   if (query.to) {
-    hebrewQuery.cityTo = mapToHebrew[query.to]
+    hebrewQuery.cityTo = toHebrew[query.to]
   }
   return hebrewQuery
 }
