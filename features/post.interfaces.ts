@@ -18,10 +18,8 @@ export interface Post {
 
 export type City = [string, string]
 
-export type IsDriver = 'true' | 'false'
-
 export interface SearchParams {
-  driver?: IsDriver
+  driver?: boolean | null
   to?: string
   from?: string
 }
@@ -32,7 +30,7 @@ export interface CityMappers {
 }
 
 export type QueryParser = (query: SearchParams) => {
-  driver: IsDriver | undefined
+  driver: boolean | undefined
   cityFrom: string | undefined
   cityTo: string | undefined
 }

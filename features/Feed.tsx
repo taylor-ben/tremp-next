@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { fetchPosts } from '../app/api'
+import { fetchPosts } from './fetch.service'
 import { CityNameTranslate } from './post.interfaces'
 import { useCityParams } from './useSearchParams'
 

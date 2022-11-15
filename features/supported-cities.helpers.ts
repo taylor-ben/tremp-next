@@ -2,7 +2,6 @@ import {
   City,
   CityMappers,
   CityNameTranslate,
-  IsDriver,
   SearchParams,
 } from './post.interfaces'
 import { removeUndefined } from './helpers'
@@ -25,12 +24,12 @@ export const parseQuery = (
   toHebrew: CityNameTranslate
 ) => {
   const hebrewQuery: {
-    driver?: IsDriver
+    driver?: boolean | null
     cityFrom?: string
     cityTo?: string
   } = {}
 
-  if (query.driver) {
+  if (query.driver !== undefined) {
     hebrewQuery.driver = query.driver
   }
   if (query.from) {

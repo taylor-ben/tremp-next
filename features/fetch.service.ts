@@ -1,11 +1,11 @@
-import { City, PostsResponse, SearchParams } from '../features/post.interfaces'
+import { City, PostsResponse, SearchParams } from './post.interfaces'
 
 async function fetchInterceptor<T>(
   input: string,
   init?: RequestInit,
   searchParams?: any
 ): Promise<T> {
-  const baseUrl = 'http://localhost:3000/api/'
+  const baseUrl = 'http://localhost:3001/api/'
   const params = new URLSearchParams(searchParams)
   const res = await fetch(`${baseUrl}${input}?${params}`, init)
   return res.json()

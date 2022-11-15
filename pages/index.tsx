@@ -2,7 +2,7 @@ import { type NextPage } from 'next'
 import Head from 'next/head'
 import { Filters } from '../features/Filters'
 import { Feed } from '../features/Feed'
-import { fetchPosts, getSupportedCities } from '../app/api'
+import { fetchPosts, getSupportedCities } from '../features/fetch.service'
 import {
   CityNameTranslate,
   PostsResponse,

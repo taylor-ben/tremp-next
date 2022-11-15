@@ -1,12 +1,12 @@
 import { useMemo } from 'react'
-import { useQueryParam } from 'use-query-params'
+import { BooleanParam, useQueryParam } from 'use-query-params'
 import { flipRecord } from './helpers'
-import { CityNameTranslate, IsDriver } from './post.interfaces'
+import { CityNameTranslate } from './post.interfaces'
 import { parseQuery } from './supported-cities.helpers'
 
 export const useCityParams = (toHebrew: CityNameTranslate) => {
   const toEnglish = useMemo(() => flipRecord(toHebrew), [toHebrew])
-  const [driver, setDriverParam] = useQueryParam<IsDriver>('driver')
+  const [driver, setDriverParam] = useQueryParam('driver', BooleanParam)
   const [from, setFrom] = useQueryParam<string | undefined>('from')
   const [to, setTo] = useQueryParam<string | undefined>('to')
   const params = parseQuery({ driver, from, to }, toHebrew)
