@@ -7,7 +7,7 @@ import {
   CityNameTranslate,
   PostsResponse,
   QueryParser,
-  SearchParams,
+  EnglishQuery,
 } from '../features/post.interfaces'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { keys } from '../features/helpers'
@@ -19,7 +19,7 @@ import {
 export const getServerSideProps = async ({
   query,
 }: {
-  query: SearchParams
+  query: EnglishQuery
 }) => {
   const queryClient = new QueryClient()
 

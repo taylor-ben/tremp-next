@@ -8,8 +8,6 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from '@mui/material'
-import { useMemo } from 'react'
-import { useQueryParam } from 'use-query-params'
 import { CityNameTranslate } from './post.interfaces'
 import { ThemeWrap } from './ThemeWrap'
 import { useCityParams } from './useSearchParams'
@@ -22,8 +20,7 @@ interface Props {
 export const Filters = ({ toHebrew }: Props) => {
   const cityOptions: string[] = Object.values(toHebrew)
 
-  const { params, setDriverParam, setToParam, setFromParam } =
-    useCityParams(toHebrew)
+  const { params, setParams } = useCityParams(toHebrew)
 
   const swap = () => {
     const { cityFrom, cityTo } = params
@@ -40,7 +37,7 @@ export const Filters = ({ toHebrew }: Props) => {
           value={params.cityFrom || null}
           options={cityOptions}
           sx={{ width: 300 }}
-          onChange={(_, option) => setFromParam(option as string)}
+          onChange={(_, cityFrom) => setParams({ cityFrom })}
           renderInput={(params) => (
             <TextField {...params} variant='filled' label='מאיפה' />
           )}
@@ -54,7 +51,7 @@ export const Filters = ({ toHebrew }: Props) => {
           value={params.cityTo || null}
           options={cityOptions}
           sx={{ width: 300 }}
-          onChange={(_, option) => setToParam(option as string)}
+          onChange={(_, cityTo) => setParams({ cityTo })}
           renderInput={(params) => (
             <TextField {...params} variant='filled' label='לאן' />
           )}
@@ -63,7 +60,7 @@ export const Filters = ({ toHebrew }: Props) => {
           color='primary'
           value={params.driver}
           exclusive
-          onChange={(_, driverValue) => setDriverParam(driverValue)}
+          onChange={(_, driver) => setParams({ driver })}
           aria-label='Driver'
         >
           <ToggleButton value={true}>נהגים</ToggleButton>

@@ -1,24 +1,33 @@
 import { useMemo } from 'react'
-import { BooleanParam, StringParam, useQueryParam } from 'use-query-params'
+import { BooleanParam, StringParam, useQueryParams } from 'use-query-params'
 import { flipRecord } from './helpers'
-import { CityNameTranslate } from './post.interfaces'
+import { CityNameTranslate, HebrewQuery, EnglishQuery } from './post.interfaces'
 import { parseQuery } from './supported-cities.helpers'
 
 export const useCityParams = (toHebrew: CityNameTranslate) => {
   const toEnglish = useMemo(() => flipRecord(toHebrew), [toHebrew])
-  const [driver, setDriverParam] = useQueryParam('driver', BooleanParam)
-  const [from, setFrom] = useQueryParam<string | null>('from')
-  const [to, setTo] = useQueryParam('to', StringParam)
-  const params = parseQuery({ driver, from, to }, toHebrew)
 
-  const setFromParam = (cityName: string | undefined) => {
-    console.log('cityName:', cityName)
-    setFrom(() => toEnglish[cityName as string])
-  }
-  const setToParam = (cityName: string | undefined) => {
-    console.log('cityName:', cityName)
-    setTo(() => toEnglish[cityName as string])
+  const [query, setQuery] = useQueryParams({
+    driver: BooleanParam,
+    from: StringParam,
+    to: StringParam,
+  })
+
+  const params = parseQuery(query, toHebrew)
+
+  function setParams(hebrewQuery: HebrewQuery) {
+    const englishQuery: EnglishQuery = {}
+    if (hebrewQuery.cityFrom !== undefined) {
+      englishQuery.from = toEnglish[hebrewQuery.cityFrom]
+    }
+    if (hebrewQuery.cityTo !== undefined) {
+      englishQuery.to = toEnglish[hebrewQuery.cityTo]
+    }
+    if (hebrewQuery.driver !== undefined) {
+      englishQuery.driver = hebrewQuery.driver
+    }
+    setQuery(englishQuery)
   }
 
-  return { params, setDriverParam, setFromParam, setToParam }
+  return { params, setParams }
 }

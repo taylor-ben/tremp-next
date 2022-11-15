@@ -3,7 +3,7 @@ import {
   CityMappers,
   CityNameTranslate,
   HebrewQuery,
-  SearchParams,
+  EnglishQuery,
 } from './post.interfaces'
 import { removeUndefined } from './helpers'
 
@@ -21,7 +21,7 @@ export function createCityMappers(supportedCities: City[]): CityMappers {
 }
 
 export const parseQuery = (
-  query: SearchParams,
+  query: EnglishQuery,
   toHebrew: CityNameTranslate
 ) => {
   const hebrewQuery: HebrewQuery = {}

@@ -18,7 +18,7 @@ export interface Post {
 
 export type City = [string, string]
 
-export interface SearchParams {
+export interface EnglishQuery {
   driver?: boolean | null
   to?: string | null
   from?: string | null
@@ -35,6 +35,6 @@ export interface HebrewQuery {
   cityTo?: string
 }
 
-export type QueryParser = (query: SearchParams) => HebrewQuery
+export type QueryParser = (query: EnglishQuery) => HebrewQuery
 
 export type CityNameTranslate = Record<string, string>

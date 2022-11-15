@@ -1,4 +1,4 @@
-import { City, PostsResponse, SearchParams } from './post.interfaces'
+import { City, PostsResponse, EnglishQuery } from './post.interfaces'
 
 async function fetchInterceptor<T>(
   input: string,
@@ -11,7 +11,7 @@ async function fetchInterceptor<T>(
   return res.json()
 }
 
-export async function fetchPosts(searchParams: SearchParams) {
+export async function fetchPosts(searchParams: EnglishQuery) {
   return fetchInterceptor<PostsResponse>(
     'posts',
     {
