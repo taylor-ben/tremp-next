@@ -24,8 +24,10 @@ export const Filters = ({ toHebrew }: Props) => {
 
   const swap = () => {
     const { cityFrom, cityTo } = params
-    // setToParam(cityFrom)
-    // setFromParam(cityTo)
+    setParams({
+      cityFrom: cityTo,
+      cityTo: cityFrom,
+    })
   }
 
   return (
