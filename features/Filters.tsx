@@ -37,6 +37,7 @@ export const Filters = ({ toHebrew }: Props) => {
         <Autocomplete
           disablePortal
           autoHighlight
+          value={params.cityFrom || null}
           options={cityOptions}
           sx={{ width: 300 }}
           onChange={(_, option) => setFromParam(option as string)}
@@ -50,6 +51,7 @@ export const Filters = ({ toHebrew }: Props) => {
         <Autocomplete
           disablePortal
           autoHighlight
+          value={params.cityTo || null}
           options={cityOptions}
           sx={{ width: 300 }}
           onChange={(_, option) => setToParam(option as string)}

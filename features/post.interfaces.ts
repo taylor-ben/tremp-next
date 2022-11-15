@@ -20,8 +20,8 @@ export type City = [string, string]
 
 export interface SearchParams {
   driver?: boolean | null
-  to?: string
-  from?: string
+  to?: string | null
+  from?: string | null
 }
 
 export interface CityMappers {
@@ -29,10 +29,12 @@ export interface CityMappers {
   toHebrew: CityNameTranslate
 }
 
-export type QueryParser = (query: SearchParams) => {
-  driver: boolean | undefined
-  cityFrom: string | undefined
-  cityTo: string | undefined
+export interface HebrewQuery {
+  driver?: boolean
+  cityFrom?: string
+  cityTo?: string
 }
+
+export type QueryParser = (query: SearchParams) => HebrewQuery
 
 export type CityNameTranslate = Record<string, string>
