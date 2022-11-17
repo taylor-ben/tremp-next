@@ -23,22 +23,21 @@ export const Filters = ({ toHebrew }: Props) => {
   const { params, setParams } = useCityParams(toHebrew)
 
   const swap = () => {
-    const { cityFrom, cityTo } = params
     setParams({
-      cityFrom: cityTo,
-      cityTo: cityFrom,
+      cityFrom: params.cityTo,
+      cityTo: params.cityFrom,
     })
   }
 
   return (
     <ThemeWrap>
-      <div>
+      <div className='grid grid-cols-hug w-min items-center'>
         <Autocomplete
           disablePortal
           autoHighlight
           value={params.cityFrom || null}
           options={cityOptions}
-          sx={{ width: 300 }}
+          sx={{ width: 200 }}
           onChange={(_, cityFrom) => setParams({ cityFrom })}
           renderInput={(params) => (
             <TextField {...params} variant='filled' label='מאיפה' />
@@ -52,25 +51,25 @@ export const Filters = ({ toHebrew }: Props) => {
           autoHighlight
           value={params.cityTo || null}
           options={cityOptions}
-          sx={{ width: 300 }}
+          sx={{ width: 200 }}
           onChange={(_, cityTo) => setParams({ cityTo })}
           renderInput={(params) => (
             <TextField {...params} variant='filled' label='לאן' />
           )}
         />
-        <ToggleButtonGroup
-          color='primary'
-          value={params.driver}
-          exclusive
-          onChange={(_, driver) => setParams({ driver })}
-          aria-label='Driver'
-        >
-          <ToggleButton value={true}>נהגים</ToggleButton>
-          <ToggleButton value={false}>טרמפיסטים</ToggleButton>
-        </ToggleButtonGroup>
-
-        <Button variant='contained'>חפש</Button>
       </div>
+      <ToggleButtonGroup
+        color='primary'
+        value={params.driver}
+        exclusive
+        onChange={(_, driver) => setParams({ driver })}
+        aria-label='Driver'
+      >
+        <ToggleButton value={true}>נהגים</ToggleButton>
+        <ToggleButton value={false}>טרמפיסטים</ToggleButton>
+      </ToggleButtonGroup>
+
+      <Button variant='contained'>חפש</Button>
     </ThemeWrap>
   )
 }

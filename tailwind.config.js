@@ -6,7 +6,11 @@ module.exports = {
     './features/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        hug: '1fr auto 1fr',
+      },
+    },
   },
   plugins: [],
 }
