@@ -7,6 +7,14 @@ import { prefixer } from 'stylis'
 
 const theme = createTheme({
   direction: 'rtl',
+  palette: {
+    primary: {
+      main: '#3b4e68',
+    },
+    secondary: {
+      main: '#e76a36',
+    },
+  },
 })
 
 const cacheRtl = createCache({
