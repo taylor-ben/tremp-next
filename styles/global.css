@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-color: #b1ded5;
+}
+
+.background_image {
+  background-size: auto calc(calc(var(--vh, 1vh) * 100) - 56px + calc(var(--vh, 1vh) * 28) - 17px);
+  background-position: top;
+  background-image: url('/images/road.svg');
+  background-color: #3d3c38;
+  background-repeat: no-repeat;
+
+}

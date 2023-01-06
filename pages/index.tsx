@@ -3,18 +3,13 @@ import Head from 'next/head'
 import { Filters } from '../features/Filters'
 import { Feed } from '../features/Feed'
 import { fetchPosts, getSupportedCities } from '../features/fetch.service'
-import {
-  CityNameTranslate,
-  PostsResponse,
-  QueryParser,
-  EnglishQuery,
-} from '../features/post.interfaces'
+import { CityNameTranslate, EnglishQuery } from '../features/post.interfaces'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
-import { keys } from '../features/helpers'
 import {
   createCityMappers,
   parseQuery,
 } from '../features/supported-cities.helpers'
+import { ToolbarCurtain } from '../features/ToolbarCurtain'
 
 export const getServerSideProps = async ({
   query,
@@ -53,11 +48,12 @@ const Home: NextPage<{ toHebrew: CityNameTranslate }> = ({ toHebrew }) => {
       </Head>
 
       <main dir='rtl'>
-        <div>hello2</div>
-        <Filters toHebrew={toHebrew} />
-        <Feed toHebrew={toHebrew} />
+        <div className='background_image'>
+          <ToolbarCurtain />
+          <Filters toHebrew={toHebrew} />
+          <Feed toHebrew={toHebrew} />
+        </div>
       </main>
-      <footer>hello</footer>
     </>
   )
 }

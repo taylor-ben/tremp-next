@@ -14,6 +14,20 @@ const theme = createTheme({
     secondary: {
       main: '#e76a36',
     },
+    info: {
+      contrastText: 'white',
+      main: '#b1ded5',
+    },
+  },
+  components: {
+    MuiAppBar: {
+      styleOverrides: {
+        colorPrimary: {
+          textColor: 'white',
+          backgroundColor: 'red',
+        },
+      },
+    },
   },
 })
 
