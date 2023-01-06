@@ -10,6 +10,7 @@ import {
   parseQuery,
 } from '../features/supported-cities.helpers'
 import { ToolbarCurtain } from '../features/ToolbarCurtain'
+import { useBackgroundColor } from '../features/useScroll'
 
 export const getServerSideProps = async ({
   query,
@@ -39,6 +40,8 @@ export const getServerSideProps = async ({
 }
 
 const Home: NextPage<{ toHebrew: CityNameTranslate }> = ({ toHebrew }) => {
+  useBackgroundColor()
+
   return (
     <>
       <Head>
